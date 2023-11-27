@@ -58,9 +58,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
 
 //        create status
-        createMessage("SUCCESSFULLY");
-        createMessage("PENDING");
-        createMessage("CANCELLED");
+        createMessageIfNotFount("SUCCESSFULLY");
+        createMessageIfNotFount("PENDING");
+        createMessageIfNotFount("CANCELLED");
 
         alreadySetup = true;
     }
@@ -101,6 +101,15 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             accountType = new AccountType();
             accountType.setAccountType(typeName);
             accountTypeRepository.save(accountType);
+        }
+    }
+
+    private void createMessageIfNotFount(String status) {
+        TransactionStatus transactionStatus = transactionStatusRepository.findByStatusName(status);
+        if (transactionStatus == null) {
+            transactionStatus = new TransactionStatus();
+            transactionStatus.setStatusName(status);
+            transactionStatusRepository.save(transactionStatus);
         }
     }
 

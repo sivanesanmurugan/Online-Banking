@@ -9,8 +9,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface UserDetailRepository extends JpaRepository<UserDetail,Long> {
+public interface UserDetailRepository extends JpaRepository<UserDetail, Long> {
 
-//    @Query("select u from user_detail u inner join u.appUser a where a.id=?1")
+    //    @Query("select u from user_detail u inner join u.appUser a where a.id=?1")
 //    Optional<UserDetail> findUserDetail(Long id);
+    @Query("select a from UserDetail a where a.appUser.id = ?1")
+    UserDetail findByUserId(Long id);
 }

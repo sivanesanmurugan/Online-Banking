@@ -4,7 +4,6 @@ import com.restapi.dto.AccountDto;
 import com.restapi.exception.common.ResourceNotFoundException;
 import com.restapi.model.Account;
 import com.restapi.model.AccountType;
-import com.restapi.model.Address;
 import com.restapi.model.AppUser;
 import com.restapi.repository.AccountRepository;
 import com.restapi.repository.AccountTypeRepository;
@@ -16,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 
 @Service
 public class AccountService {
@@ -32,11 +31,9 @@ public class AccountService {
     private AccountTypeRepository accountTypeRepository;
 
 
-    public AccountResponse findAccount(Long id) {
-        System.out.println("idd" + id);
-        Account account = accountRepository.findAllById(id);
-        System.out.println(account);
-        return accountDto.mapToAccountResponse(account);
+    public List<AccountResponse> findAccount(Long id) {
+        List<Account> accountList = accountRepository.findUserAccounts(id);
+        return accountDto.mapToAccountResponse(accountList);
     }
 
     public Account createAccount(AccountRequest accountRequest) {
@@ -68,20 +65,19 @@ public class AccountService {
         return account;
     }
 
-    public Account accountApproval(AdminAccountApprovalRequest accountRequest) {
-        Account account = accountDto.mapToAccountApproval(accountRequest);
-//        AppUser appUser = userRepository.findById(accountRequest.getUser_id())
-//                .orElseThrow(() -> new ResourceNotFoundException("userId", "userId",
-//                        accountRequest.getUser_id()));
-//        account.setUser(appUser);
-//        account.setAccountType(accountType);
-//        account.setBoolean(true);
-        accountRepository.save(account);
-        return account;
+    public String accountApproval(Long id) {
+        accountRepository.updateUser(id);
+        return "Success";
     }
 
-//    public AccountResponse deleteById(Long id) {
-//        accountRepository.deleteById(id);
-//        return findAccount(id);
-//    }
+    public List<Account> accountNotApproval() {
+        return accountRepository.findByNotApprovalUsers();
+    }
+
+    public List<Account> findSameBankAccount(Long id) {
+        return accountRepository.findAll()
+                .stream()
+                .filter(account -> !account.getAccount_No().equals(id))
+                .toList();
+    }
 }

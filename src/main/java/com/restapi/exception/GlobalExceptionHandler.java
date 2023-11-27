@@ -1,6 +1,7 @@
 package com.restapi.exception;
 
 import com.restapi.exception.common.AppException;
+import com.restapi.exception.common.InsufficientBalance;
 import com.restapi.exception.common.InvalidUserException;
 import com.restapi.exception.common.ResourceNotFoundException;
 import com.restapi.response.common.APIResponse;
@@ -27,6 +28,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     // handle specific exceptions
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<APIResponse> handleResourceNotFoundException(
+            ResourceNotFoundException exception, WebRequest webRequest) {
+        return responseBuilder(HttpStatus.NOT_FOUND, exception.getMessage(), webRequest);
+    }
+
+    @ExceptionHandler(InsufficientBalance.class)
+    public ResponseEntity<APIResponse> handleInsufficientBalance(
             ResourceNotFoundException exception, WebRequest webRequest) {
         return responseBuilder(HttpStatus.NOT_FOUND, exception.getMessage(), webRequest);
     }

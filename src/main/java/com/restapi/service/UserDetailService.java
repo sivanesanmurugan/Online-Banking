@@ -17,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserDetailService {
@@ -35,14 +36,9 @@ public class UserDetailService {
     @Autowired
     private UserRepository userRepository;
 
-//    public UserDetail UserDetail(Long id) {
-//        UserDetail userDetail = userDetailRepository.findUserDetail(id)
-//                .orElseThrow(() -> new ResourceNotFoundException("userDetail", "userId", id));
-//       return userDetail;
-//    }
-
     public UserDetailResponse create(UserDetailRequest userDetailRequest) {
         UserDetail userDetail = userDetailDto.mapToUserDetail(userDetailRequest);
+        System.out.println(userDetail.getState());
         AppUser appUser = userRepository.findById(userDetailRequest.getUser_Id())
                 .orElseThrow(() -> new ResourceNotFoundException("userId", "userId",
                         userDetailRequest.getUser_Id()));
@@ -61,4 +57,7 @@ public class UserDetailService {
         return userDetailDto.mapToUserDetailResponse(userDetail);
     }
 
+    public UserDetail UserDetail(Long id) {
+        return userDetailRepository.findByUserId(id);
+    }
 }

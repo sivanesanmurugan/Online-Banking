@@ -19,4 +19,6 @@ public class AccountRequest {
     private Long user_id;
 
     private Long acc_type_id;
+
+    private boolean isBoolean;
 }

@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/account")
@@ -52,12 +53,11 @@ public class AccountController {
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<APIResponse> deleteAccount(@PathVariable Integer id) {
-//        AccountResponse accountResponse = accountService
-//                .deleteById(Long.valueOf(id));
-//        apiResponse.setStatus(HttpStatus.OK.value());
-//        apiResponse.setData(accountResponse);
-//        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
-//    }
+   @GetMapping("/sameBank/{id}")
+   public ResponseEntity<APIResponse> findSameBankUser(@PathVariable Long id){
+       List<Account> accountList=accountService.findSameBankAccount(id);
+       apiResponse.setStatus(HttpStatus.OK.value());
+       apiResponse.setData(accountList);
+       return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+   }
 }

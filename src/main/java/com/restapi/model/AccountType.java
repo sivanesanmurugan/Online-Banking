@@ -5,10 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.yaml.snakeyaml.events.Event;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -26,7 +24,7 @@ public class AccountType {
 
     private String accountType;
 
-    @OneToOne(mappedBy = "accountType")
-    private Account account;
+    @OneToMany(mappedBy = "accountType")
+    private List<Account> account;
 
 }

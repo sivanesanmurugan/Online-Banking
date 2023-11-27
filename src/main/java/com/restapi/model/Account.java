@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -18,9 +19,9 @@ public class Account {
 
     private Long account_No;
 
-    private String ifsc_Code;
+    private String ifsc_Code="SBIN0000938";
 
-    private Double balance;
+    private Double balance=2000.0;
 
     @JsonIgnore
     @ManyToOne
@@ -28,7 +29,7 @@ public class Account {
     private AppUser user;
 
     @JsonIgnore
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "acc_type_id", referencedColumnName = "id")
     private AccountType accountType;
 

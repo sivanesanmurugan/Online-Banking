@@ -47,7 +47,7 @@ public class AppUser {
     private List<Notification> notifications;
 
     @OneToMany(mappedBy = "user")
-    private List<Account> accounts;
+    private List<Account> accounts = new ArrayList<>();
 
     @CreationTimestamp
     @Column(updatable = false)

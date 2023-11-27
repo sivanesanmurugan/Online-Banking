@@ -26,13 +26,13 @@ public class UserDetailController {
     @Autowired
     private UserDetailService userDetailService;
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<APIResponse> UserDetail(@PathVariable Long id) {
-//        UserDetail userDetail = userDetailService.UserDetail(id);
-//        apiResponse.setStatus(HttpStatus.OK.value());
-//        apiResponse.setData(userDetail);
-//        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
-//    }
+    @GetMapping("/{id}")
+    public ResponseEntity<APIResponse> UserDetail(@PathVariable Long id) {
+        UserDetail userDetail = userDetailService.UserDetail(id);
+        apiResponse.setStatus(HttpStatus.OK.value());
+        apiResponse.setData(userDetail);
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
 
     @PostMapping()
     public ResponseEntity<APIResponse> createAddress(@RequestBody UserDetailRequest userDetailRequest) {

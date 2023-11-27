@@ -9,6 +9,8 @@ import com.restapi.response.AccountResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -20,8 +22,21 @@ public class AccountDto {
     @Autowired
     private UserRepository userRepository;
 
-    public AccountResponse mapToAccountResponse(Account account) {
-        return new AccountResponse(account);
+    public List<AccountResponse> mapToAccountResponse(List<Account> account) {
+        List<AccountResponse> accountResponseList = new ArrayList<>();
+
+        for(Account acc : account)
+        {
+            AccountResponse accountResponse = new AccountResponse();
+            accountResponse.setId(acc.getId());
+            accountResponse.setAccount_No(acc.getAccount_No());
+            accountResponse.setIfsc_code(acc.getIfsc_Code());
+            accountResponse.setBalance(acc.getBalance());
+            accountResponse.setAccountType(acc.getAccountType().getAccountType());
+            accountResponseList.add(accountResponse);
+
+        }
+        return  accountResponseList;
     }
 
     public Account mapToAccount(AccountRequest accountRequest) {
@@ -30,18 +45,9 @@ public class AccountDto {
             account.setId(accountRequest.getId());
         }
         account.setAccount_No(accountRequest.getAccount_No());
-        account.setIfsc_Code(accountRequest.getIfsc_Code());
-        account.setBalance(accountRequest.getBalance());
         return account;
     }
-    public Account mapToAccountApproval(AdminAccountApprovalRequest accountRequest) {
-        Account account = new Account();
-        if (accountRequest.getId() != null) {
-            account.setId(accountRequest.getId());
-        }
-        account.setBoolean(accountRequest.isBoolean());
-        return account;
-    }
+
 
 
 }

@@ -1,5 +1,6 @@
 package com.restapi.response;
 
+import com.restapi.model.Role;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,4 +9,5 @@ import lombok.Setter;
 public class AuthResponse {
     private Long id;
     private String username;
+    private String role;
 }

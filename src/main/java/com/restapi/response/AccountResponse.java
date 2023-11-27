@@ -3,11 +3,21 @@ package com.restapi.response;
 import com.restapi.model.Account;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
 @Getter
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class AccountResponse {
-    private Account account;
+//    private List<Account> accountList;
+
+    private Long id;
+    private Long account_No;
+    private String ifsc_code;
+    private Double balance;
+    private String accountType;
 }

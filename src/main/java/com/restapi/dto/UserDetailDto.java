@@ -15,10 +15,14 @@ public class UserDetailDto {
         if (userDetailRequest.getId() != null) {
             userDetail.setId(userDetailRequest.getId());
         }
-        userDetail.setFirstName(userDetailRequest.getFirstname());
-        userDetail.setLastName(userDetailRequest.getLastname());
+        userDetail.setFirstName(userDetailRequest.getFirstName());
+        userDetail.setLastName(userDetailRequest.getLastName());
         userDetail.setEmail(userDetailRequest.getEmail());
         userDetail.setPhone(userDetailRequest.getPhone());
+        userDetail.setAddress(userDetailRequest.getAddress());
+        userDetail.setCity(userDetailRequest.getCity());
+        userDetail.setState(userDetailRequest.getState());
+        userDetail.setZipcode(userDetailRequest.getZipcode());
         return userDetail;
     }
 

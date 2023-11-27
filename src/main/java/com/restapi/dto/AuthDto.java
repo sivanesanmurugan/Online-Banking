@@ -3,7 +3,10 @@ package com.restapi.dto;
 import com.restapi.model.AppUser;
 import com.restapi.request.RegisterRequest;
 import com.restapi.response.AuthResponse;
+import com.restapi.response.RegisterResponse;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class AuthDto {
@@ -19,6 +22,8 @@ public class AuthDto {
         AuthResponse authResponse = new AuthResponse();
         authResponse.setId(appUser.getId());
         authResponse.setUsername(appUser.getUsername());
+        authResponse.setRole(appUser.getRole().getName());
         return authResponse;
     }
+
 }

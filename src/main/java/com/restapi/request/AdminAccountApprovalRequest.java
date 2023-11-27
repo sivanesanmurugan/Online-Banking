@@ -9,6 +9,4 @@ import lombok.*;
 @ToString
 public class AdminAccountApprovalRequest {
     private Long id;
-
-    private boolean isBoolean;
 }

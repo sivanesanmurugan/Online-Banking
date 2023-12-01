@@ -1,0 +1,60 @@
+-- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: online_banking
+-- ------------------------------------------------------
+-- Server version	8.0.34
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `account`
+--
+
+DROP TABLE IF EXISTS `account`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `account` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `account_no` bigint DEFAULT NULL,
+  `balance` double DEFAULT NULL,
+  `ifsc_code` varchar(255) DEFAULT NULL,
+  `is_approval` bit(1) NOT NULL,
+  `acc_type_id` int DEFAULT NULL,
+  `user_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKadcr8ls3sx7kgnahgqff8icsw` (`acc_type_id`),
+  KEY `FKra7xoi9wtlcq07tmoxxe5jrh4` (`user_id`),
+  CONSTRAINT `FKadcr8ls3sx7kgnahgqff8icsw` FOREIGN KEY (`acc_type_id`) REFERENCES `account_type` (`id`),
+  CONSTRAINT `FKra7xoi9wtlcq07tmoxxe5jrh4` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `account`
+--
+
+LOCK TABLES `account` WRITE;
+/*!40000 ALTER TABLE `account` DISABLE KEYS */;
+INSERT INTO `account` VALUES (1,3855616149,1000,'SBIN0000938',_binary '',1,1),(2,8046164418,2000,'SBIN0000938',_binary '\0',1,3),(3,1762446018,2000,'SBIN0000938',_binary '\0',1,4),(4,8346100469,2000,'SBIN0000938',_binary '\0',1,5),(5,3799833194,1688,'SBIN0000938',_binary '',1,6),(6,8251198688,2200.5,'SBIN0000938',_binary '',1,7),(7,4607415239,2200,'SBIN0000938',_binary '\0',2,7),(8,5601702792,1797.5,'SBIN0000938',_binary '',2,1),(9,8074857603,1800,'SBIN0000938',_binary '',1,8),(10,3664577704,2000,'SBIN0000938',_binary '\0',2,6),(11,1191626056,2000,'SBIN0000938',_binary '\0',2,4),(12,3634191243,2000,'SBIN0000938',_binary '\0',2,3),(13,1847864489,2100,'SBIN0000938',_binary '\0',1,9),(14,4293231489,2000,'SBIN0000938',_binary '\0',1,10),(15,8214251078,1579.5,'SBIN0000938',_binary '',1,11),(16,6201924226,2120,'SBIN0000938',_binary '',2,11),(17,6372548539,2000,'SBIN0000938',_binary '\0',1,12);
+/*!40000 ALTER TABLE `account` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-12-01 17:24:25

@@ -2,6 +2,7 @@ package com.restapi.controller.admin;
 
 import com.restapi.model.AppUser;
 import com.restapi.model.Role;
+import com.restapi.response.AllUserDetailsResponse;
 import com.restapi.response.RegisterResponse;
 import com.restapi.response.common.APIResponse;
 import com.restapi.service.UserService;
@@ -27,10 +28,17 @@ public class AdminGetUsers {
 
     @GetMapping("/allUsers")
     public ResponseEntity<APIResponse> getAllUsers() {
-        List<AppUser> appUsers = userService.findAll();
+        List<AllUserDetailsResponse>  appUsers = userService.findAll();
         apiResponse.setStatus(HttpStatus.OK.value());
         apiResponse.setData(appUsers);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
+//    @GetMapping("/allAccount")
+//    public ResponseEntity<APIResponse> getAllUsers() {
+//        List<AppUser> appUsers = userService.findAll();
+//        apiResponse.setStatus(HttpStatus.OK.value());
+//        apiResponse.setData(appUsers);
+//        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+//    }
 
 }

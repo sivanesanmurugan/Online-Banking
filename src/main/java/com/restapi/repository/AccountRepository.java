@@ -16,10 +16,10 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 
     @Modifying
     @Transactional
-    @Query("UPDATE Account a SET a.isBoolean=true WHERE a.id=?1")
+    @Query("UPDATE Account a SET a.isApproval=true WHERE a.id=?1")
     void updateUser(Long id);
 
-    @Query("select a from Account a where a.isBoolean = false")
+    @Query("select a from Account a where a.isApproval = false")
     List<Account> findByNotApprovalUsers();
 
     @Query("select d from Account d inner join d.user a where a.id=?1")
@@ -31,4 +31,7 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     Account findtargetAccount(Long targetAccount);
     @Query("SELECT CASE WHEN COUNT(a) > 0 THEN true ELSE false END FROM Account a WHERE a.account_No = ?1")
     boolean existsByAccount_No(Long accountNo);
+
 }
+
+

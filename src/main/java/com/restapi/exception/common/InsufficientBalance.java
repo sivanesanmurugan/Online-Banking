@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public class InsufficientBalance extends RuntimeException {
 
-    public InsufficientBalance() {
-        super("Insufficent Ba");
+    public InsufficientBalance(String message) {
+        super(message);
     }
 }

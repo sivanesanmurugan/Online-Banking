@@ -1,43 +1,52 @@
 package com.restapi.request;
 
-import com.restapi.model.AccountType;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @Getter
 @Setter
 public class RegisterRequest {
-    private Long id;
 
-    private String firstName;
+        private Long id;
 
-    private String lastName;
+        @NotEmpty(message = "First name cannot be empty")
+        private String firstName;
 
-    private String email;
+        @NotEmpty(message = "Last name cannot be empty")
+        private String lastName;
 
-    private String phone;
+        @NotEmpty(message = "Email cannot be empty")
+        @Email(message = "Invalid email format")
+        private String email;
 
-    private String address;
+        @NotEmpty(message = "Phone cannot be empty")
+        @Pattern(regexp = "\\d{10}", message = "Phone should be a 10-digit number")
+        private String phone;
 
-    private String city;
+        @NotEmpty(message = "Address cannot be empty")
+        private String address;
 
-    private String state;
+        @NotEmpty(message = "City cannot be empty")
+        private String city;
 
-    private Integer zipcode;
+        @NotEmpty(message = "State cannot be empty")
+        private String state;
 
-    @NotEmpty
-    @Size(min = 2, message = "Username should have at least 2 characters")
-    private String username;
+        @NotNull(message = "Zip code cannot be null")
+        @Min(value = 100000, message = "Zip code should be a 6-digit number")
+        @Max(value = 999999, message = "Zip code should be a 6-digit number")
+        private Integer zipcode;
 
-    @NotEmpty
-    @Size(min = 2, message = "Password should have at least 2 characters")
-    private String password;
+        @NotEmpty(message = "Username cannot be empty")
+        @Size(min = 2, message = "Username should have at least 2 characters")
+        private String username;
 
+        @NotEmpty(message = "Password cannot be empty")
+        @Size(min = 2, message = "Password should have at least 2 characters")
+        private String password;
 
-    private Long acc_type_id;
-
-}
+        @NotNull(message = "Account type ID cannot be null")
+        private Long acc_type_id;
+    }

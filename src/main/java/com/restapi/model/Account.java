@@ -33,6 +33,6 @@ public class Account {
     @JoinColumn(name = "acc_type_id", referencedColumnName = "id")
     private AccountType accountType;
 
-    private boolean isBoolean=false;
+    private boolean isApproval=false;
 
 }

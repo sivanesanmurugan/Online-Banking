@@ -39,8 +39,7 @@ public class TransactionService {
         Optional<TransactionStatus> transactionStatus = transactionStatusRepository.findById(transactionRequest.getTransactionStatus());
             double sourceBalance = source.getBalance();
             if (sourceBalance < transactionRequest.getAmount()) {
-                System.out.println("insufficient balance");
-                throw new InsufficientBalance();
+                throw new InsufficientBalance("Insufficient Balance");
             }
             double newSourceBalance = source.getBalance() - transactionRequest.getAmount();
             source.setBalance(newSourceBalance);
@@ -82,7 +81,7 @@ public class TransactionService {
         if (transactionType.isPresent() && transactionStatus.isPresent()) {
             double sourceBalance = source.getBalance();
             if (sourceBalance < transactionRequest.getAmount()) {
-                throw new InsufficientBalance();
+                throw new InsufficientBalance("Insufficient Balance");
             }
             double newSourceBalance = source.getBalance() - transactionRequest.getAmount();
             source.setBalance(newSourceBalance);

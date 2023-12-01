@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 @Service
 public class AccountService {
@@ -37,7 +38,12 @@ public class AccountService {
     }
 
     public Account createAccount(AccountRequest accountRequest) {
-        Account account = accountDto.mapToAccount(accountRequest);
+        Account account = new Account();
+        Long generatedAccountNumber;
+        do {
+            generatedAccountNumber = autoGenerate();
+        } while (isAccountNumberExists(generatedAccountNumber));
+        account.setAccount_No(generatedAccountNumber);
         AppUser appUser = userRepository.findById(accountRequest.getUser_id())
                 .orElseThrow(() -> new ResourceNotFoundException("userId", "userId",
                         accountRequest.getUser_id()));
@@ -52,7 +58,7 @@ public class AccountService {
     }
 
     public Account updateAccount(AccountRequest accountRequest) {
-        Account account = accountDto.mapToAccount(accountRequest);
+        Account account = new Account();
         AppUser appUser = userRepository.findById(accountRequest.getUser_id())
                 .orElseThrow(() -> new ResourceNotFoundException("userId", "userId",
                         accountRequest.getUser_id()));
@@ -79,5 +85,20 @@ public class AccountService {
                 .stream()
                 .filter(account -> !account.getAccount_No().equals(id))
                 .toList();
+    }
+
+    public static Long autoGenerate() {
+        Random random = new Random();
+        long lowerBound = 1000000000L;
+        long upperBound = 9999999999L;
+        return lowerBound + Math.abs(random.nextLong()) % (upperBound - lowerBound + 1);
+    }
+
+    public boolean isAccountNumberExists(Long accountNumber) {
+        return accountRepository.existsByAccount_No(accountNumber);
+    }
+
+    public Account findByAccount(Long id) {
+        return accountRepository.findsoureAccount(id);
     }
 }

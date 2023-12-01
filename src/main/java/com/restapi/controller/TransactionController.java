@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -24,7 +25,7 @@ public class TransactionController {
     private TransactionService transactionService;
 
     @PostMapping("/self")
-    public ResponseEntity<APIResponse> selfTransaction(@RequestBody
+    public ResponseEntity<APIResponse> selfTransaction(@Valid @RequestBody
                                                          TransactionRequest transactionRequest) {
         Transaction transaction = transactionService.createSelfTransaction(transactionRequest);
         apiResponse.setStatus(HttpStatus.OK.value());
@@ -40,7 +41,7 @@ public class TransactionController {
     }
 
     @PostMapping("/sameBank")
-    public ResponseEntity<APIResponse> sameBankTransaction(@RequestBody
+    public ResponseEntity<APIResponse> sameBankTransaction(@Valid @RequestBody
                                                    TransactionRequest transactionRequest) {
         Transaction transaction = transactionService.createSelfTransaction(transactionRequest);
         apiResponse.setStatus(HttpStatus.OK.value());
@@ -49,7 +50,7 @@ public class TransactionController {
     }
 
     @PostMapping("/otherBank")
-    public ResponseEntity<APIResponse> otherBankTransaction(@RequestBody
+    public ResponseEntity<APIResponse> otherBankTransaction(@Valid @RequestBody
                                                            TransactionRequest transactionRequest) {
         Transaction transaction = transactionService.createOtherBankTransaction(transactionRequest);
         apiResponse.setStatus(HttpStatus.OK.value());

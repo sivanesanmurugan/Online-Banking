@@ -30,8 +30,9 @@ public class AccountDto {
             AccountResponse accountResponse = new AccountResponse();
             accountResponse.setId(acc.getId());
             accountResponse.setAccount_No(acc.getAccount_No());
-            accountResponse.setIfsc_code(acc.getIfsc_Code());
+            accountResponse.setIfsc_Code(acc.getIfsc_Code());
             accountResponse.setBalance(acc.getBalance());
+            accountResponse.setApproval(acc.isApproval());
             accountResponse.setAccountType(acc.getAccountType().getAccountType());
             accountResponseList.add(accountResponse);
 
@@ -47,7 +48,5 @@ public class AccountDto {
         account.setAccount_No(accountRequest.getAccount_No());
         return account;
     }
-
-
 
 }

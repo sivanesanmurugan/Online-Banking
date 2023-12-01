@@ -17,7 +17,8 @@ public class AccountResponse {
 
     private Long id;
     private Long account_No;
-    private String ifsc_code;
+    private String ifsc_Code;
     private Double balance;
     private String accountType;
+    private boolean isApproval;
 }

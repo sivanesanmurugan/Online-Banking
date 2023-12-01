@@ -3,6 +3,7 @@ package com.restapi.service;
 import com.restapi.dto.AccountDto;
 import com.restapi.dto.AuthDto;
 import com.restapi.dto.AuthDto;
+import com.restapi.dto.UserDetailDto;
 import com.restapi.exception.common.AppException;
 import com.restapi.exception.common.InvalidUserException;
 import com.restapi.exception.common.ResourceNotFoundException;
@@ -10,6 +11,7 @@ import com.restapi.model.*;
 import com.restapi.repository.*;
 import com.restapi.request.LoginRequest;
 import com.restapi.request.RegisterRequest;
+import com.restapi.response.AllUserDetailsResponse;
 import com.restapi.response.AuthResponse;
 import com.restapi.response.RegisterResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -31,14 +34,17 @@ public class UserService {
     private RoleRepository roleRepository;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-    
+
     @Autowired
     AccountRepository accountRepository;
-    
+
     @Autowired
     UserDetailRepository userDetailRepository;
     @Autowired
     AccountTypeRepository accountTypeRepository;
+
+    @Autowired
+    UserDetailDto userDetailDto;
 
     public AuthResponse register(RegisterRequest registerRequest) {
         AppUser appUser = authDto.mapToAppUser(registerRequest);
@@ -79,8 +85,9 @@ public class UserService {
         long upperBound = 9999999999L;
         return lowerBound + Math.abs(random.nextLong()) % (upperBound - lowerBound + 1);
     }
+
     private static UserDetail getUserDetail(RegisterRequest registerRequest, AppUser appUser) {
-        UserDetail userDetail=new UserDetail();
+        UserDetail userDetail = new UserDetail();
         userDetail.setFirstName(registerRequest.getFirstName());
         userDetail.setLastName(registerRequest.getLastName());
         userDetail.setEmail(registerRequest.getEmail());
@@ -108,8 +115,14 @@ public class UserService {
 
         return authDto.mapToAuthResponse(appUser);
     }
-    public List<AppUser> findAll() {
-     return userRepository.findAll();
+
+    public List<AllUserDetailsResponse>  findAll() {
+
+          List<AppUser> alluser=  userRepository.findAll()
+                .stream()
+                .filter(appUser -> !appUser.getRole().getName().equalsIgnoreCase("admin"))
+                .toList();
+            return userDetailDto.mapToAllUser(alluser);
     }
 
 

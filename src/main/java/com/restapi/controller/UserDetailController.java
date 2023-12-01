@@ -1,11 +1,7 @@
 package com.restapi.controller;
 
 import com.restapi.model.UserDetail;
-import com.restapi.request.AddressRequest;
-import com.restapi.request.LoginRequest;
 import com.restapi.request.UserDetailRequest;
-import com.restapi.response.AddressResponse;
-import com.restapi.response.AuthResponse;
 import com.restapi.response.UserDetailResponse;
 import com.restapi.response.common.APIResponse;
 import com.restapi.service.UserDetailService;
@@ -13,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/user/showDetails")

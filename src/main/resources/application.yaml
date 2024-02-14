@@ -1,0 +1,81 @@
+# Common properties for all environments
+#spring:
+#  h2:
+#    console:
+#      enabled: true
+#  datasource:
+#    username: root
+#    password: root
+#    driverClassName: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/online_banking?useSSL=false&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
+#  jpa:
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.MySQL8Dialect
+#    defer-datasource-initialization: true
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+#  mvc:
+#    pathmatch:
+#      matching-strategy: ANT_PATH_MATCHER
+#
+#logging:
+#  file:
+#    name: app.log
+#  level:
+#    org:
+#      springframework:
+#        security: TRACE
+
+#for different environments
+spring:
+  h2:
+    console:
+      enabled: true
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    defer-datasource-initialization: true
+    hibernate:
+        ddl-auto: update
+    show-sql: true
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  springfox:
+    documentation:
+      swagger-ui:
+        enabled: true
+    swagger:
+      enabled: true
+
+logging:
+  file:
+    name: app.log
+  level:
+    org:
+      springframework:
+        security: TRACE
+
+# Development environment specific properties
+---
+spring:
+  profiles:
+    active: dev
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/online_banking?useSSL=false&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
+
+
+# Production environment specific properties
+---
+spring:
+  profiles: prod
+
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/online_banking_prod?useSSL=false&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
